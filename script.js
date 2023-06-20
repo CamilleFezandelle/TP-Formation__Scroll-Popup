@@ -1,9 +1,32 @@
-// Créer un événement au scroll
+const navBar = document.querySelector('nav');
+const picture = document.getElementById('imgImprovise');
+const popup = document.getElementById('popup');
+const closePopup = document.getElementById('closeBtn');
 
-// Réduire la navbar quand on descend vers le vite, la remettre à sa taille initiale si on remonte tout en haut
+let playOnce = true;
 
-// Faire apparaitre l'image de la partie improvise
+window.addEventListener('scroll', () => {
+	let scrollValue = (window.scrollY + window.innerHeight) / document.body.offsetHeight;
 
-// Faire apparaitre la popup quand on est en bas du site
+	if (window.scrollY > 45) {
+		navBar.style.height = '45px';
+	} else {
+		navBar.style.height = '90px';
+	}
 
-// Bonus : quand on clicke sur la popup elle disparait pour toujours
+	if (scrollValue > 0.45) {
+		picture.style.opacity = '1';
+		picture.style.transform = 'translateX(0px)';
+	}
+
+	if (scrollValue > 0.85 && playOnce) {
+		popup.style.opacity = '1';
+		popup.style.transform = 'translateX(0px)';
+		playOnce = false;
+	}
+});
+
+closePopup.addEventListener('click', () => {
+	popup.style.opacity = '0';
+	popup.style.transform = 'translateX(400px)';
+});
